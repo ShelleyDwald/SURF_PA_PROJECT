@@ -7,7 +7,7 @@ st.set_page_config(page_title="Surfing Data Logger & Dashboard", layout="wide")
 
 
 # Establish connection to Supabase using Streamlit secrets
-@st.resource
+@st.cache_resource
 def init_connection():
     return psycopg2.connect(st.secrets["postgres"]["connection_string"])
 
