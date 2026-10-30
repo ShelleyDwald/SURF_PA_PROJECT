@@ -6,10 +6,14 @@ import pandas as pd
 st.set_page_config(page_title="Surfing Data Logger & Dashboard", layout="wide")
 
 
-# Establish connection to Supabase using Streamlit secrets
+# Establish connection to Supabase using Streamlit secrets with error catching
 @st.cache_resource
 def init_connection():
-    return psycopg2.connect(st.secrets["postgres"]["connection_string"])
+    try:
+        return psycopg2.connect(st.secrets["postgres"]["connection_string"])
+    except Exception as e:
+        st.error(f"Detailed Connection Error: {e}")
+        st.stop()
 
 
 conn = init_connection()
